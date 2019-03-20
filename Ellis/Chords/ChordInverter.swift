@@ -17,7 +17,7 @@ public class ChordInverter
     
     func rotate()
     {
-        let first = chordNotes.removeAtIndex(0)
+        let first = chordNotes.remove(at: 0)
         chordNotes.append(first)
     }
     

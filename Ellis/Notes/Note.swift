@@ -51,19 +51,19 @@ public enum Note: Int
 
     public func sharp() -> Note
     {
-        return accidentedNote(Accident.Sharp)
+        return accidentedNote(accident: Accident.Sharp)
     }
 
     public func flat() -> Note
     {
-        return accidentedNote(Accident.Flat)
+        return accidentedNote(accident: Accident.Flat)
     }
 
     public func intervalWithNote(other: Note) -> Interval
     {
-        let distance = measureAbsoluteSemitones(other)
+        let distance = measureAbsoluteSemitones(other: other)
 
-        return Interval.createIntervalFromDistance(distance)
+        return Interval.createIntervalFromDistance(distance: distance)
     }
 
     public func measureAbsoluteSemitones(other: Note) -> Int
@@ -84,7 +84,7 @@ public enum Note: Int
                     ? resultingNote.flat()
                     : resultingNote.sharp()
 
-            interval = intervalWithNote(resultingNote);
+            interval = intervalWithNote(other: resultingNote);
         }
 
         return resultingNote;
@@ -96,12 +96,12 @@ public enum Note: Int
         let a4Frequency = 440.0
         let power = Double(Pitch - Note.A.Pitch) / octaveRange
         let frequency = pow(2.0, power) * a4Frequency
-        return octave.adjustFrequencyForOctave(frequency)
+        return octave.adjustFrequencyForOctave(frequency: frequency)
     }
 
     private func accidentedNote(accident: Accident) -> Note
     {
-        let accidentedNoteIndex = self.rawValue + accidentedNoteDistance(accident)
+        let accidentedNoteIndex = self.rawValue + accidentedNoteDistance(accident: accident)
 
         if accidentedNoteIndex < 0
         {
@@ -118,7 +118,7 @@ public enum Note: Int
 
     private func accidentedNoteDistance(accident: Accident) -> Int
     {
-        return accident.direction() * accidentedNoteAbsoluteDistance(accident)
+        return accident.direction() * accidentedNoteAbsoluteDistance(accident: accident)
     }
 
     private func accidentedNoteAbsoluteDistance(accident: Accident) -> Int

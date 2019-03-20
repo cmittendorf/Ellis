@@ -4,7 +4,7 @@ class Drop3Inverter: ChordInverter
     {
         rotate()
         rotate()
-        swapChordNotes(1, secondNoteIndex: 2)
+        swapChordNotes(firstNoteIndex: 1, secondNoteIndex: 2)
         return createChord()
     }
     

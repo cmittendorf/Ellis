@@ -8,11 +8,11 @@ public enum ChordShapeFactory: Int
     {
         switch self
         {
-        case Closed:
+        case .Closed:
             return chord.toClosed()
-        case Drop2:
+        case .Drop2:
             return chord.toClosed().toDrop2()
-        case Drop3:
+        case .Drop3:
             return chord.toClosed().toDrop3()
         }
     }
@@ -21,17 +21,17 @@ public enum ChordShapeFactory: Int
     {
         switch self
         {
-        case Closed:
+        case .Closed:
             return
                 ChordInverter(
                     chordNotes: chord.notesWithFunctions,
                     inversion: chord.Inversion)
-        case Drop2:
+        case .Drop2:
             return
                 Drop2Inverter(
                     chordNotes: chord.notesWithFunctions,
                     inversion: chord.Inversion)
-        case Drop3:
+        case .Drop3:
             return
                 Drop3Inverter(
                     chordNotes: chord.notesWithFunctions,

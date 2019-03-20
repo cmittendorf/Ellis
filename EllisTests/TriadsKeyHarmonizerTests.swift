@@ -133,7 +133,7 @@ class TriadsKeyHarmonizerTests: XCTestCase
     {
         let harmonizer = TriadsKeyHarmonizer(key: Key.CMajor)
 
-        let chord = harmonizer.chordForScaleDegree(0)
+        let chord = harmonizer.chordForScaleDegree(scaleDegree: 0)
 
         XCTAssertEqual(ChordFunction.Major, chord.function)
     }
@@ -142,7 +142,7 @@ class TriadsKeyHarmonizerTests: XCTestCase
     {
         let harmonizer = TriadsKeyHarmonizer(key: Key.DMajor)
 
-        let chord = harmonizer.chordForScaleDegree(1)
+        let chord = harmonizer.chordForScaleDegree(scaleDegree: 1)
 
         XCTAssertEqual(ChordFunction.Minor, chord.function)
     }
@@ -151,7 +151,7 @@ class TriadsKeyHarmonizerTests: XCTestCase
     {
         let harmonizer = TriadsKeyHarmonizer(key: Key.EMajor)
 
-        let chord = harmonizer.chordForScaleDegree(2)
+        let chord = harmonizer.chordForScaleDegree(scaleDegree: 2)
 
         XCTAssertEqual(ChordFunction.Minor, chord.function)
     }
@@ -160,7 +160,7 @@ class TriadsKeyHarmonizerTests: XCTestCase
     {
         let harmonizer = TriadsKeyHarmonizer(key: Key.FMajor)
 
-        let chord = harmonizer.chordForScaleDegree(3)
+        let chord = harmonizer.chordForScaleDegree(scaleDegree: 3)
 
         XCTAssertEqual(ChordFunction.Major, chord.function)
     }
@@ -169,7 +169,7 @@ class TriadsKeyHarmonizerTests: XCTestCase
     {
         let harmonizer = TriadsKeyHarmonizer(key: Key.GMajor)
 
-        let chord = harmonizer.chordForScaleDegree(4)
+        let chord = harmonizer.chordForScaleDegree(scaleDegree: 4)
 
         XCTAssertEqual(ChordFunction.Major, chord.function)
     }
@@ -178,7 +178,7 @@ class TriadsKeyHarmonizerTests: XCTestCase
     {
         let harmonizer = TriadsKeyHarmonizer(key: Key.AMajor)
 
-        let chord = harmonizer.chordForScaleDegree(5)
+        let chord = harmonizer.chordForScaleDegree(scaleDegree: 5)
 
         XCTAssertEqual(ChordFunction.Minor, chord.function)
     }
@@ -187,7 +187,7 @@ class TriadsKeyHarmonizerTests: XCTestCase
     {
         let harmonizer = TriadsKeyHarmonizer(key: Key.BMajor)
 
-        let chord = harmonizer.chordForScaleDegree(6)
+        let chord = harmonizer.chordForScaleDegree(scaleDegree: 6)
 
         XCTAssertEqual(ChordFunction.Diminished, chord.function)
     }

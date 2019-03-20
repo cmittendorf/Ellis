@@ -60,13 +60,13 @@ public class Chord: Equatable
     
     public var function:ChordFunction
     {
-        return ChordFunction.functionForIntervals(chordIntervals())
+        return ChordFunction.functionForIntervals(intervals: chordIntervals())
     }
     
     public var name:String
     {
         let closedChord = self.toClosed()
-        return closedChord.noteByFunction(NoteFunction.Root).Name
+        return closedChord.noteByFunction(function: NoteFunction.Root).Name
             + closedChord.function.Abreviature;
     }
     
@@ -87,20 +87,20 @@ public class Chord: Equatable
     
     public func invert() -> Chord
     {
-        let inverter = inverterFactory.createInverter(self)
+        let inverter = inverterFactory.createInverter(chord: self)
         return inverter.invert()
     }
     
     public func resetInvertions() -> Chord
     {
-        let inverter = inverterFactory.createInverter(self)
+        let inverter = inverterFactory.createInverter(chord: self)
         return inverter.resetInvertions()
     }
     
     public func toDrop2() -> Chord
     {
-        var drop2ChordNotes = swapChordNotes(0, secondNoteIndex: 1)
-        let first = drop2ChordNotes.removeAtIndex(0)
+        var drop2ChordNotes = swapChordNotes(firstNoteIndex: 0, secondNoteIndex: 1)
+        let first = drop2ChordNotes.remove(at: 0)
         drop2ChordNotes.append(first)
         
         return Chord(
@@ -132,13 +132,13 @@ public class Chord: Equatable
     
     public func transpose(newRoot: Note) -> Chord
     {
-        let interval = noteByFunction(NoteFunction.Root)
-            .intervalWithNote(newRoot)
+        let interval = noteByFunction(function: NoteFunction.Root)
+            .intervalWithNote(other: newRoot)
         var transposedNotes = [NoteWithFunction]()
         
         for chordNote in chordNotes
         {
-            let transposedNote = chordNote.note.transpose(interval)
+            let transposedNote = chordNote.note.transpose(transposingInterval: interval)
             let transposedNoteWithFunction =
             NoteWithFunction(
                 note: transposedNote,
@@ -151,7 +151,7 @@ public class Chord: Equatable
     
     public func voiceForBass(desiredBass: NoteFunction) -> Chord
     {
-        return voiceForNoteFunction(desiredBass,
+        return voiceForNoteFunction(desiredNoteFunction: desiredBass,
             closure: {
                 (chord: Chord) -> NoteWithFunction in
                 return chord.bassWithFunction()
@@ -160,7 +160,7 @@ public class Chord: Equatable
     
     public func voiceForLead(desiredLead: NoteFunction) -> Chord
     {
-        return voiceForNoteFunction(desiredLead,
+        return voiceForNoteFunction(desiredNoteFunction: desiredLead,
             closure: {
                 (chord: Chord) -> NoteWithFunction in
                 return chord.leadWithFunction()
@@ -172,14 +172,14 @@ public class Chord: Equatable
         var chord = self
         var bestInversion = self
         var lead = chord.lead
-        var currentMinimumDistance = leadTarget.measureAbsoluteSemitones(lead)
+        var currentMinimumDistance = leadTarget.measureAbsoluteSemitones(other: lead)
         
         for _ in chordNotes
         {
             lead = chord.lead
             let newMinimunDistance = min(
-                leadTarget.measureAbsoluteSemitones(lead),
-                lead.measureAbsoluteSemitones(leadTarget))
+                leadTarget.measureAbsoluteSemitones(other: lead),
+                lead.measureAbsoluteSemitones(other: leadTarget))
             
             if(newMinimunDistance < currentMinimumDistance)
             {
@@ -198,15 +198,15 @@ public class Chord: Equatable
     
     private func voiceForNoteFunction(
         desiredNoteFunction: NoteFunction,
-        closure: (chord:Chord) -> NoteWithFunction) -> Chord
+        closure: (_ chord:Chord) -> NoteWithFunction) -> Chord
     {
         var invertedChord = self
-        var noteFunctionForCurrentInvertion = closure(chord: invertedChord)
+        var noteFunctionForCurrentInvertion = closure(invertedChord)
         
         while(noteFunctionForCurrentInvertion.function != desiredNoteFunction)
         {
             invertedChord = invertedChord.invert();
-            noteFunctionForCurrentInvertion = closure(chord: invertedChord);
+            noteFunctionForCurrentInvertion = closure(invertedChord);
         }
         
         return invertedChord;
@@ -238,13 +238,13 @@ public class Chord: Equatable
     private func chordIntervals() -> [Interval]
     {
         var intervals: [Interval] = []
-        let root = noteByFunction(NoteFunction.Root)
+        let root = noteByFunction(function: NoteFunction.Root)
         
         for note: NoteWithFunction in chordNotes
         {
             if note.note != root
             {
-                intervals.append(root.intervalWithNote(note.note))
+                intervals.append(root.intervalWithNote(other: note.note))
             }
         }
         
@@ -272,5 +272,5 @@ public class Chord: Equatable
 
 public func ==(chordA: Chord, chordB: Chord) -> Bool
 {
-    return chordA.equalTo(chordB)
+    return chordA.equalTo(otherChord: chordB)
 }

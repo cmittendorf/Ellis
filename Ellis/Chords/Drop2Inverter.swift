@@ -5,7 +5,7 @@ class Drop2Inverter: ChordInverter
         let last = chordNotes.removeLast()
         rotate()
         rotate()
-        chordNotes.insert(last, atIndex: 0)
+        chordNotes.insert(last, at: 0)
         return createChord()
     }
     

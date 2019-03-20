@@ -274,85 +274,85 @@ class NoteTests: XCTestCase
 
     func testThatItShould_return_major_third_as_the_distance_between_c_and_e()
     {
-        XCTAssert(Interval.MajorThird == Note.C.intervalWithNote(Note.E), "")
+        XCTAssert(Interval.MajorThird == Note.C.intervalWithNote(other: Note.E), "")
     }
 
     func testThatItShould_return_minor_third_as_the_distance_between_c_and_eb()
     {
-        XCTAssert(Interval.MinorThird == Note.C.intervalWithNote(Note.EFlat), "")
+        XCTAssert(Interval.MinorThird == Note.C.intervalWithNote(other: Note.EFlat), "")
     }
 
     func testThatItShould_return_e_when_transposing_by_major_third()
     {
 
-        XCTAssert(Note.E == Note.C.transpose(Interval.MajorThird));
+        XCTAssert(Note.E == Note.C.transpose(transposingInterval: Interval.MajorThird));
     }
 
     func testThatItShould_return_dsharp_when_transposing_by_minor_third()
     {
 
-        XCTAssert(Note.DSharp == Note.C.transpose(Interval.MinorThird));
+        XCTAssert(Note.DSharp == Note.C.transpose(transposingInterval: Interval.MinorThird));
     }
 
     func testThatItShouldHaveFrequencyOf55HzForA1()
     {
-        let frequency = Note.A.frequency(Octave.Contra)
+        let frequency = Note.A.frequency(octave: Octave.Contra)
 
         XCTAssertEqual(440.0 / 8, frequency, "")
     }
 
     func testThatItShouldHaveFrequencyOf110HzForA2()
     {
-        let frequency = Note.A.frequency(Octave.Great)
+        let frequency = Note.A.frequency(octave: Octave.Great)
 
         XCTAssertEqual(440.0 / 4, frequency, "")
     }
 
     func testThatItShouldHaveFrequencyOf220HzForA3()
     {
-        let frequency = Note.A.frequency(Octave.Small)
+        let frequency = Note.A.frequency(octave: Octave.Small)
 
         XCTAssertEqual(440.0 / 2, frequency, "")
     }
 
     func testThatItShouldHaveFrequencyOf440HzForA4()
     {
-        let frequency = Note.A.frequency(Octave.OneLine)
+        let frequency = Note.A.frequency(octave: Octave.OneLine)
 
         XCTAssertEqual(440.0, frequency, "")
     }
 
     func testThatItShouldHaveFrequencyOf880HzForA5()
     {
-        let frequency = Note.A.frequency(Octave.TwoLine)
+        let frequency = Note.A.frequency(octave: Octave.TwoLine)
 
         XCTAssertEqual(440.0 * 2, frequency, "")
     }
 
     func testThatItShouldHaveFrequencyOf1760HzForA6()
     {
-        let frequency = Note.A.frequency(Octave.ThreeLine)
+        let frequency = Note.A.frequency(octave: Octave.ThreeLine)
 
         XCTAssertEqual(440.0 * 4, frequency, "")
     }
 
     func testThatItShouldHaveFrequencyOf3520HzForA7()
     {
-        let frequency = Note.A.frequency(Octave.FourLine)
+        let frequency = Note.A.frequency(octave: Octave.FourLine)
 
         XCTAssertEqual(440.0 * 8, frequency, "")
     }
 
     func testThatItShouldHaveFrequencyOf7040HzForA8()
     {
-        let frequency = Note.A.frequency(Octave.FiveLine)
+        let frequency = Note.A.frequency(octave: Octave.FiveLine)
 
         XCTAssertEqual(440.0 * 16, frequency, "")
     }
 
     func testThatItShouldHaveFrequencyOf14080HzForA9()
     {
-        let frequency = Note.A.frequency(Octave.SixLine)
+        let frequency = Note.A.frequency(octave: Octave.SixLine)
 
         XCTAssertEqual(440.0 * 32, frequency, "")
     }

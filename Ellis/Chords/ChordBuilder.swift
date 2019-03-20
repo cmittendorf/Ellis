@@ -17,8 +17,8 @@ public class ChordBuilder
 
         for interval in chordFunction.Intervals
         {
-            addNoteWithInterval(
-                interval,
+            _ = addNoteWithInterval(
+                interval: interval,
                 function: NoteFunction(rawValue: functionIndex)!)
             functionIndex += 1
         }
@@ -33,7 +33,7 @@ public class ChordBuilder
         interval: Interval,
         function: NoteFunction) -> ChordBuilder
     {
-        let note = createNoteWithDistanceFromRoot(interval)
+        let note = createNoteWithDistanceFromRoot(distance: interval)
         notes.append(
             NoteWithFunction(note: note.sharp().flat(), function: function))
         return self
@@ -47,15 +47,15 @@ public class ChordBuilder
 
     public func addMajorThird() -> ChordBuilder
     {
-        let note = createNoteWithDistanceFromRoot(Interval.MajorThird)
-        addThird(note)
+        let note = createNoteWithDistanceFromRoot(distance: Interval.MajorThird)
+        _ = addThird(note: note)
         return self
     }
 
     public func addMinorThird() -> ChordBuilder
     {
-        let note = createNoteWithDistanceFromRoot(Interval.MajorThird)
-        addThird(note.flat())
+        let note = createNoteWithDistanceFromRoot(distance: Interval.MajorThird)
+        _ = addThird(note: note.flat())
         return self
     }
 
@@ -67,15 +67,15 @@ public class ChordBuilder
 
     public func addPerfectFifth() -> ChordBuilder
     {
-        let note = createNoteWithDistanceFromRoot(Interval.PerfectFifth)
-        addFifth(note)
+        let note = createNoteWithDistanceFromRoot(distance: Interval.PerfectFifth)
+        _ = addFifth(note: note)
         return self
     }
 
     public func addDiminishedFifth() -> ChordBuilder
     {
-        let note = createNoteWithDistanceFromRoot(Interval.PerfectFifth)
-        addFifth(note.flat())
+        let note = createNoteWithDistanceFromRoot(distance: Interval.PerfectFifth)
+        _ = addFifth(note: note.flat())
         return self
     }
 
@@ -88,27 +88,27 @@ public class ChordBuilder
 
     public func addMajorSeventh() -> ChordBuilder
     {
-        let note = createNoteWithDistanceFromRoot(Interval.MajorSeventh)
-        addSeventh(note)
+        let note = createNoteWithDistanceFromRoot(distance: Interval.MajorSeventh)
+        _ = addSeventh(note: note)
         return self
     }
 
     public func addMinorSeventh() -> ChordBuilder
     {
-        let note = createNoteWithDistanceFromRoot(Interval.MajorSeventh)
-        addSeventh(note.flat())
+        let note = createNoteWithDistanceFromRoot(distance: Interval.MajorSeventh)
+        _ = addSeventh(note: note.flat())
         return self
     }
 
     public func addDiminishedSeventh() -> ChordBuilder
     {
-        let note = createNoteWithDistanceFromRoot(Interval.MajorSeventh)
-        addSeventh(note.flat().flat())
+        let note = createNoteWithDistanceFromRoot(distance: Interval.MajorSeventh)
+        _ = addSeventh(note: note.flat().flat())
         return self
     }
 
     private func createNoteWithDistanceFromRoot(distance: Interval) -> Note
     {
-        return root.note.transpose(distance)
+        return root.note.transpose(transposingInterval: distance)
     }
 }

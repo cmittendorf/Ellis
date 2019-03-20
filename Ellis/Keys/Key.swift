@@ -29,7 +29,7 @@ public enum Key: Int
     case GMinor
     case GSharpMinor
 
-    private static let fifths =
+    private static var fifths =
         [Note.F, Note.C, Note.G, Note.D, Note.A, Note.E, Note.B]
     
     private static let allValues =
@@ -128,27 +128,27 @@ public enum Key: Int
 
     public func degreeForNote(note:Note) -> Int
     {
-        return generateKeyNotes().indexOf(note)! + 1
+        return generateKeyNotes().firstIndex(of: note)! + 1
     }
     
     private func generateKeyNotes() -> [Note]
     {
         if self.accidents < 0
         {
-            return sortKeyNotes(createKeyFromFlatAccidents())
+            return sortKeyNotes(notes: createKeyFromFlatAccidents())
         }
 
         if self.accidents > 0
         {
-            return sortKeyNotes(createKeyFromSharpAccidents())
+            return sortKeyNotes(notes: createKeyFromSharpAccidents())
         }
 
-        return sortKeyNotes(Key.fifths);
+        return sortKeyNotes(notes: Key.fifths);
     }
 
     private func createKeyFromFlatAccidents() -> [Note]
     {
-        var keyNotes = Array(Key.fifths.reverse())
+        var keyNotes = Array(Key.fifths.reversed())
         let max = (-1) * accidents
 
         for i in 0 ..< max
@@ -174,7 +174,7 @@ public enum Key: Int
 
     private func sortKeyNotes(notes: [Note]) -> [Note]
     {
-        var sortedkeyNotes = notes.sort({ n1, n2 in return n2 > n1 })
+        var sortedkeyNotes = notes.sorted(by: { n1, n2 in return n2 > n1 })
 
         if(sortedkeyNotes.first == root)
         {
@@ -187,7 +187,7 @@ public enum Key: Int
         {
             last = sortedkeyNotes.last
             sortedkeyNotes.removeLast()
-            sortedkeyNotes.insert(last!, atIndex: 0)
+            sortedkeyNotes.insert(last!, at: 0)
         }
 
         return sortedkeyNotes

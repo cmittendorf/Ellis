@@ -7,9 +7,9 @@ public enum KeyHarmonizerFactory: Int
     {
         switch self
         {
-        case Triad:
+        case .Triad:
             return TriadsKeyHarmonizer(key: key)
-        case Seventh:
+        case .Seventh:
             return SeventhsKeyHarmonizer(key: key)
         }
     }

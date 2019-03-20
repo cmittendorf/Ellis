@@ -3,7 +3,7 @@ public class SeventhsKeyHarmonizer: KeyHarmonizer
     public override func i() -> Chord
     {
         return buildChord(
-            key.i(),
+            root: key.i(),
             third: key.iii(),
             fifth: key.v(),
             seventh: key.vii())
@@ -12,7 +12,7 @@ public class SeventhsKeyHarmonizer: KeyHarmonizer
     public override func ii() -> Chord
     {
         return buildChord(
-            key.ii(),
+            root: key.ii(),
             third: key.iv(),
             fifth: key.vi(),
             seventh: key.i())
@@ -21,7 +21,7 @@ public class SeventhsKeyHarmonizer: KeyHarmonizer
     public override func iii() -> Chord
     {
         return buildChord(
-            key.iii(),
+            root: key.iii(),
             third: key.v(),
             fifth: key.vii(),
             seventh: key.ii());
@@ -30,7 +30,7 @@ public class SeventhsKeyHarmonizer: KeyHarmonizer
     public override func iv() -> Chord
     {
         return buildChord(
-            key.iv(),
+            root: key.iv(),
             third: key.vi(),
             fifth: key.i(),
             seventh: key.iii());
@@ -39,7 +39,7 @@ public class SeventhsKeyHarmonizer: KeyHarmonizer
     public override func v() -> Chord
     {
         return buildChord(
-            key.v(),
+            root: key.v(),
             third: key.vii(),
             fifth: key.ii(),
             seventh: key.iv());
@@ -48,7 +48,7 @@ public class SeventhsKeyHarmonizer: KeyHarmonizer
     public override func vi() -> Chord
     {
         return buildChord(
-            key.vi(),
+            root: key.vi(),
             third: key.i(),
             fifth: key.iii(),
             seventh: key.v());
@@ -57,7 +57,7 @@ public class SeventhsKeyHarmonizer: KeyHarmonizer
     public override func vii() -> Chord
     {
         return buildChord(
-            key.vii(),
+            root: key.vii(),
             third: key.ii(),
             fifth: key.iv(),
             seventh: key.vi());
@@ -70,9 +70,9 @@ public class SeventhsKeyHarmonizer: KeyHarmonizer
         seventh: Note) -> Chord
     {
         return ChordBuilder(root: root)
-            .addThird(third)
-            .addFifth(fifth)
-            .addSeventh(seventh)
+            .addThird(note: third)
+            .addFifth(note: fifth)
+            .addSeventh(note: seventh)
             .build()
     }
 }
